@@ -183,9 +183,15 @@ const AuthForm = () => {
             </div>
           )}
           <div className="mt-5">
-            <Button className="w-full" disabled={loading}>
-              {loading ? "Processing ..." : "Login"}
-            </Button>
+            {variant === "LOGIN" ? (
+              <Button className="w-full" disabled={loading}>
+                {loading ? "Processing ..." : "Login"}
+              </Button>
+            ) : (
+              <Button className="w-full" disabled={loading}>
+                {loading ? "Processing ..." : "Register"}
+              </Button>
+            )}
           </div>
         </div>
       </form>
