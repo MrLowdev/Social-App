@@ -11,6 +11,7 @@ import { AuthErrorType, AuthStateType } from "@/types/type";
 import { Label } from "@/components/ui/Label";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
+import { toast } from "@/hooks/use-toast";
 
 type Variant = "LOGIN" | "REGISTER";
 
@@ -44,15 +45,57 @@ const AuthForm = () => {
         .then((res) => {
           setLoading(false);
           const response = res.data;
-          if (response.status === 400) {
-            setErrors(response.errors);
-          } else if (response.status === 200) {
+          if (response.status === 200) {
             router.push(`/home`);
           }
         })
         .catch((err) => {
           setLoading(false);
-          console.log("The error is", err);
+          if (err.response.data.errors.username) {
+            toast({
+              title: "Error",
+              description: err.response.data.errors.username,
+              className: "bg-red-300",
+            });
+          }
+          if (err.response.data.errors.name) {
+            toast({
+              title: "Error",
+              description: err.response.data.errors.name,
+              className: "bg-red-300",
+            });
+          }
+
+          if (err.response.data.errors.email) {
+            toast({
+              title: "Error",
+              description: err.response.data.errors.email,
+              className: "bg-red-300",
+            });
+          }
+          if (err.response.data.errors.password) {
+            toast({
+              title: "Error",
+              description: err.response.data.errors.password,
+              className: "bg-red-300",
+            });
+          }
+          if (err.response.data.errors.password_confirmation) {
+            toast({
+              title: "Error",
+              description: err.response.data.errors.password_confirmation,
+              className: "bg-red-300",
+            });
+          }
+          console.log(err.response.data.status);
+
+          if (err.response.data.status === 400) {
+            toast({
+              title: "Error",
+              description: err.response.data.errors.message,
+              className: "bg-red-300",
+            });
+          }
         });
     }
 
@@ -75,7 +118,13 @@ const AuthForm = () => {
         })
         .catch((err) => {
           setLoading(false);
-          console.log("the error is", err);
+          if (err.response.data.status === 400) {
+            toast({
+              title: "Error",
+              description: err.response.data.errors.message,
+              className: "bg-red-300",
+            });
+          }
         });
     }
   };

@@ -31,7 +31,7 @@ export default function SignOutBtn() {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => signOut({ callbackUrl: "/login" })}>
+          <AlertDialogAction onClick={() => signOut({ callbackUrl: "/" })}>
             Continue
           </AlertDialogAction>
         </AlertDialogFooter>
