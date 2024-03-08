@@ -48,9 +48,24 @@ const AuthForm = () => {
           if (response.status === 200) {
             router.push(`/home`);
           }
+          if (response.status === 400) {
+            toast({
+              title: "Error",
+              description: response.errors.message,
+              className: "bg-red-300",
+            });
+          }
         })
         .catch((err) => {
           setLoading(false);
+
+          if (err.response.data.status === 400) {
+            toast({
+              title: "Error",
+              description: err.response.data.errors.message,
+              className: "bg-red-300",
+            });
+          }
           if (err.response.data.errors.username) {
             toast({
               title: "Error",
@@ -84,15 +99,6 @@ const AuthForm = () => {
             toast({
               title: "Error",
               description: err.response.data.errors.password_confirmation,
-              className: "bg-red-300",
-            });
-          }
-          console.log(err.response.data.status);
-
-          if (err.response.data.status === 400) {
-            toast({
-              title: "Error",
-              description: err.response.data.errors.message,
               className: "bg-red-300",
             });
           }
