@@ -1,10 +1,9 @@
 import AuthForm from "@/components/auth/AuthForm";
 import Loading from "@/components/common/Loading";
 import Image from "next/image";
-import Link from "next/link";
 import { Suspense } from "react";
 
-export default function Login() {
+export default async function Auth() {
   return (
     <div className="bg-background">
       <div className=" h-screen w-screen flex justify-center items-center">

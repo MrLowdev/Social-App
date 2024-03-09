@@ -1,7 +1,5 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { signIn } from "next-auth/react";
@@ -12,6 +10,7 @@ import { Label } from "@/components/ui/Label";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { toast } from "@/hooks/use-toast";
+import Loading from "../common/Loading";
 
 type Variant = "LOGIN" | "REGISTER";
 
@@ -29,10 +28,10 @@ const AuthForm = () => {
   });
   const [errors, setErrors] = useState<AuthErrorType>({});
   const [loading, setLoading] = useState<boolean>(false);
-
+  console.log(status);
   useEffect(() => {
-    if (status == "authenticated") {
-      router.push("/");
+    if (status === "authenticated") {
+      router.push("/home");
     }
   }, [router, status]);
 
