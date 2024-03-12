@@ -51,6 +51,7 @@ export async function POST(req: NextRequest) {
       { status: 400 }
     );
   } catch (error) {
+    console.log(error);
     if (error instanceof errors.E_VALIDATION_ERROR) {
       return NextResponse.json(
         { status: 400, errors: error.messages },
